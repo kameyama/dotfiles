@@ -4,7 +4,7 @@
 ## usage
 
 ```
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/switch-m/dotfiles/master/bootstrap.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/kameyama038/dotfiles/master/bootstrap.sh)"
 ```
 
 インストールするとhttpsでcloneされるためパスワード入力が必要となります。  
