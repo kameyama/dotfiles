@@ -1,0 +1,31 @@
+export DOTFILES_PATH=$HOME/dotfiles
+
+export IGNOREEOF=3
+
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
+
+# for wsl
+if [ $(uname -r | grep -i "microsoft") ]; then
+  export PATH="$(echo "$PATH" | sed -r -e 's;:/mnt/[^:]+;;g')"
+fi
+
+export PATH=$HOME/.local/bin:$HOME/local/bin:$HOME/bin:/usr/local/bin:/usr/bin/:/usr/local/sbin:/usr/sbin:/sbin:$PATH
+
+if [ "$(uname)" = "Darwin" ]; then
+  export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+  export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
+elif [ $(uname -r | grep -i "microsoft") ]; then
+  export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
+  test $(command -v brew) && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+elif [ "$(uname)" = "Linux" ] && [ ! $(uname -r | grep -i "microsoft") ]; then
+  export PATH=$HOME/.linuxbrew/bin:$PATH
+  test $(command -v brew) && eval $($HOME/.linuxbrew/bin/brew shellenv)
+fi
+
+if type nvim > /dev/null 2>&1; then
+  export EDITOR=nvim
+else
+  export EDITOR=vim
+fi
