@@ -84,3 +84,16 @@ function select-history() {
 }
 zle -N select-history
 bindkey '^r' select-history
+
+
+
+
+#############################################
+# 重複を記録しない
+setopt hist_ignore_dups
+
+# 開始と終了を記録
+setopt EXTENDED_HISTORY
+
+# 補完時にヒストリを自動的に展開         
+setopt hist_expand

@@ -24,11 +24,7 @@ elif [ "$(uname)" = "Linux" ] && [ ! $(uname -r | grep -i "microsoft") ]; then
   test $(command -v brew) && eval $($HOME/.linuxbrew/bin/brew shellenv)
 fi
 
-if type nvim > /dev/null 2>&1; then
-  export EDITOR=nvim
-else
-  export EDITOR=vim
-fi
+export EDITOR=emacs
 
 
 
@@ -51,14 +47,7 @@ export HISTSIZE=1000
 # 履歴ファイルに保存される履歴の件数
 export SAVEHIST=100000
 
-# 重複を記録しない
-setopt hist_ignore_dups
 
-# 開始と終了を記録
-setopt EXTENDED_HISTORY
-
-# 補完時にヒストリを自動的に展開         
-setopt hist_expand
 
 #postgres
 export PGDATA=/usr/local/var/postgres
