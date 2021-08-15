@@ -2,3 +2,4 @@ Brewfile.lock.json
 .netrwhist
 README.md
 Bootstrap.sh
+.DS_Store
