@@ -1,0 +1,77 @@
+* [[https://github.com/zdharma-continuum/zinit][zinit]]
+
+  zinitはzshの柔軟かつ高速なplugin manager.
+
+** install   
+  #+begin_src shell
+    sh -c "$(curl -fsSL https://git.io/zinit-install)"
+  #+end_src
+
+  installすると.zshrcに設定が追加される. 
+  
+** update
+   
+   #+begin_src shell
+     # Self update
+     zinit self-update
+
+     # Plugin update
+     zinit update
+
+     # Plugin parallel update
+     zinit update --parallel
+
+     # Increase the number of jobs in a concurrent-set to 40
+     zinit update --parallel 40
+   #+end_src
+
+** usage
+   基本的には.zshrcに追加していく. 以下の形で書く.
+
+   #+begin_src shell
+     zinit load  <repo/plugin> # Load with reporting/investigating.
+     zinit light <repo/plugin> # Load without reporting/investigating.
+
+     zinit snippet <URL>
+   #+end_src
+   
+
+
+* [[https://github.com/starship/starship][starship]]
+
+  prompt themeのひとつ. 現在のdirectory, pythonのversion, gitの状態などの見た目を変えることができる.
+
+** install & setup
+   zinitのREADMEに以下の例が乗っていたがエラーを出す:
+  #+begin_src shell
+    # Load starship theme
+    zinit ice as"command" from"gh-r" \ # `starship` binary as command, from github release
+	      atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \ # starship setup at clone(create init.zsh, completion)
+	      atpull"%atclone" src"init.zsh" # pull behavior same as clone, source init.zsh
+    zinit light starship/starship
+  #+end_src
+
+  素直にstarshipのREADMEに従う:
+  #+begin_src shell
+    brew install starship
+  #+end_src
+
+  .zshrcに以下を追加:
+  #+begin_src shell
+    eval "$(starship init zsh)"
+  #+end_src
+
+** font
+
+   nerd系のfontをinstall:
+   #+begin_src shell
+     brew tap homebrew/cask-fonts
+     brew install --cask font-hack-nerd-font
+   #+end_src
+
+   使っているpromptでそのfontを使う. (iterm2ならprofile > text > font)
+   
+   
+** [[config][config]]
+
+   ~/.config/starship.tomlに設定を書く. 
