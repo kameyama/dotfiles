@@ -1,4 +1,4 @@
-name: CI
+name: test_brew
 
 
 on:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   test:
-    name: Test
+    name: brew
     runs-on: macos-latest
     steps:
       - name: Checkout source code
@@ -17,5 +17,7 @@ jobs:
 
 
       - name: Rotate Brew cache
-        run: brew install awscli 
+        run: |
+          brew update
+          brew install awscli 
 
