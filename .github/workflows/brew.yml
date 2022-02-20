@@ -1,0 +1,21 @@
+name: CI
+
+
+on:
+  push:
+    branches:
+      - "**"
+
+
+jobs:
+  test:
+    name: Test
+    runs-on: macos-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v1
+
+
+      - name: Rotate Brew cache
+        run: brew install awscli 
+
