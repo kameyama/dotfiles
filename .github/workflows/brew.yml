@@ -1,23 +1,101 @@
-name: test_brew
+# name: test_brew
 
 
-on:
-  push:
-    branches:
-      - "**"
+# on:
+#   push:
+#     branches:
+#       - "**"
 
+
+# jobs:
+#   test:
+#     name: brew
+#     runs-on: macos-latest
+#     steps:
+#       - name: Checkout source code
+#         uses: actions/checkout@v1
+
+
+#       - name: Rotate Brew cache
+#         run: |
+#           brew update
+#           brew install awscli 
+
+name: Install awscli and awsebcli on Mac
+
+on: push
 
 jobs:
-  test:
-    name: brew
+  test1:
+    name: Install commands
     runs-on: macos-latest
     steps:
-      - name: Checkout source code
-        uses: actions/checkout@v1
+      - uses: actions/checkout@master
 
-
-      - name: Rotate Brew cache
+      - name: Install awscli and awsebcli
         run: |
           brew update
-          brew install awscli 
+          brew install awscli awsebcli
+          brew upgrade
 
+      - name: Check
+        run: |
+          aws --version
+          eb --version
+
+  test2:
+    name: Install awscli and awsebcli
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Install awscli
+        run: |
+          brew update
+          brew install awscli
+          brew upgrade
+
+      - uses: actions/setup-python@master
+        with:
+          python-version: '3.7'
+
+      - name: Install awsebcli
+        run: pip install -U awsebcli
+
+      - name: Check
+        run: |
+          aws --version
+          eb --version
+
+  test3:
+    name: Install awscli and awsebcli
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Install awsebcli
+        run: |
+          brew update
+          brew install awsebcli
+          brew upgrade
+
+      - uses: actions/setup-python@master
+        with:
+          python-version: '3.7'
+
+      - name: Install awscli
+        run: pip install -U awscli
+
+      - name: Check
+        run: |
+          aws --version
+          eb --version
+
+  jq:
+    name: Check if jq is installed
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Execute jq
+        run: jq --version
