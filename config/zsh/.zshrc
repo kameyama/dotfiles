@@ -1,5 +1,8 @@
 # Interactive shell settings.
 
+# Non-login shells (e.g. some terminal panes) skip .zprofile, so load PATH here
+[[ -o login ]] || source "$ZDOTDIR/.zprofile"
+
 # History
 HISTFILE="$XDG_STATE_HOME/zsh/history"
 HISTSIZE=100000
