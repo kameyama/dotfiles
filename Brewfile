@@ -1,3 +1,5 @@
+tap "d12frosted/emacs-plus"
+
 # CLI
 brew "git"
 brew "gh"
@@ -16,6 +18,7 @@ brew "pandoc"
 brew "imagemagick"
 brew "ffmpeg"
 brew "juliaup"
+brew "d12frosted/emacs-plus/emacs-plus@30", args: ["with-xwidgets", "with-imagemagick"]
 
 # Apps
 cask "1password"
