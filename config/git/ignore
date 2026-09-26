@@ -1,0 +1,9 @@
+.DS_Store
+.idea/
+.vscode/
+*.swp
+.env
+.env.*
+.direnv/
+**/.terraform/*
+**/.claude/settings.local.json

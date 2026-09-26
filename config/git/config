@@ -1,0 +1,24 @@
+[init]
+	defaultBranch = main
+[pull]
+	rebase = true
+[push]
+	autoSetupRemote = true
+[fetch]
+	prune = true
+[rebase]
+	autoStash = true
+[merge]
+	conflictStyle = zdiff3
+[diff]
+	algorithm = histogram
+[rerere]
+	enabled = true
+[alias]
+	st = status -sb
+	co = switch
+	lg = log --oneline --graph --decorate
+
+# user.name / user.email and other machine-specific settings go here (not tracked by git)
+[include]
+	path = ~/.config/git/config.local

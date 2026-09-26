@@ -1,0 +1,7 @@
+# Global tool versions (migrated from ~/.tool-versions).
+# julia is managed by juliaup, so it is not listed here.
+[tools]
+python = "3.14"
+node = "22.4.1"
+terraform = "1.12.0"
+uv = "0.9.9"
