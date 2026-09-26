@@ -1,5 +1,3 @@
-Brewfile.lock.json
-.netrwhist
-README.md
-Bootstrap.sh
 .DS_Store
+config/zsh/local.zsh
+config/git/config.local
