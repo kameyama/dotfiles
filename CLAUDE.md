@@ -14,7 +14,7 @@ just brew      # brew bundle
 just check     # 変更後の検証: bash -n / zsh -n / git config -l / brew bundle check
 ```
 
-`install.sh` と `brew bundle` は `~/` や `/opt/homebrew` に書き込むため、直接実行するとサンドボックス内で失敗する。必ず `just` 経由で、単独のコマンドとして呼ぶ（後述の「コマンドの実行」を参照）。`zsh -n` は1ファイルずつしか検査しないので、`check` ではループで回している。
+レシピは `~/justfile` にある（リポジトリの外。実行ルールは `~/.claude/CLAUDE.md` の「コマンドの実行」）。`install.sh` と `brew bundle` は `~/` や `/opt/homebrew` に書き込むため、直接実行せず `just` 経由で単独のコマンドとして呼ぶ。`zsh -n` は1ファイルずつしか検査しないので、`check` ではループで回している。
 
 ## 構成の要点
 
@@ -29,15 +29,3 @@ just check     # 変更後の検証: bash -n / zsh -n / git config -l / brew bun
 - 言語ランタイム（python, node, terraform, uv）は **mise** で管理する（`config/mise/config.toml`）。asdf, pyenv, direnv は使わない（移行済み）。julia は mise ではなく brew の `juliaup` で管理する。
 - `Brewfile` には直接使うパッケージだけを書き、依存で入るもの（例: emacs-plus が使う gnutls, texinfo）は書かない。
 - `emacs-plus@30` は公式以外の tap（`d12frosted/emacs-plus`）から入れる。`brew bundle check` を通すには、先に `brew trust --formula d12frosted/emacs-plus/emacs-plus@30` が必要。
-
-## コマンドの実行
-
-just 経由のコマンドはサンドボックス外で実行される。レシピは `justfile` の `default`（`just --list`）/ `install` / `brew` / `check` の4つ（`just` 自体は `Brewfile` で入れる）。
-
-サンドボックス外で動くのは、除外コマンドを単独で呼んだときだけである。除外コマンド（`.claude/settings.local.json` の `excludedCommands`: git / gcloud / aws / just、および組織の管理設定: gh / tflint / docker / op）は、コマンドの先頭で照合される。前に `cd` や `VAR=...` を付けたり、`|` / `&&` / `;` でつないだり、末尾に `> file` を付けたりすると、サンドボックス内で動く。
-
-- 中で動くと失敗するもの: just、SSH の `git fetch` / `git push`（`~/.ssh` を読めない）、gcloud / aws（API に届かない）、docker。後処理は別のツール呼び出しにする。
-- 中でも通るもの: gh（`api.github.com` は許可済み）と、読み取りだけの git。ファイルへのリダイレクトは付けてよい。
-- このリポジトリで中だと失敗するもの: `install.sh`、`brew install` / `brew bundle`（`~/` と `/opt/homebrew` に書き込めない）。`just install` / `just brew` を使う。レシピにない brew 操作（uninstall など）はユーザーに実行を依頼する。
-
-レシピを勝手に追加しない。just のレシピは「サンドボックス外で実行してよいコマンドの許可リスト」であり、追加すればその許可範囲を広げることになる。必要になったら、何をするレシピかを説明し、ユーザーの許可を得てから追加する。
