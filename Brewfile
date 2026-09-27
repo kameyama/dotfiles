@@ -12,6 +12,7 @@ brew "fd"
 brew "jq"
 brew "just"
 brew "tree"
+brew "tmux"
 brew "coreutils"
 brew "awscli"
 brew "cmake"
@@ -19,7 +20,7 @@ brew "pandoc"
 brew "imagemagick"
 brew "ffmpeg"
 brew "juliaup"
-brew "d12frosted/emacs-plus/emacs-plus@30", args: ["with-xwidgets", "with-imagemagick"]
+brew "d12frosted/emacs-plus/emacs-plus@31", args: ["with-xwidgets", "with-imagemagick"]
 
 # Apps
 cask "1password"
