@@ -14,7 +14,10 @@ just brew      # brew bundle
 just check     # 変更後の検証: bash -n / zsh -n / git config -l / brew bundle check
 ```
 
-レシピは `~/justfile` にある（リポジトリの外。実行ルールは `~/.claude/CLAUDE.md` の「コマンドの実行」）。`install.sh` と `brew bundle` は `~/` や `/opt/homebrew` に書き込むため、直接実行せず `just` 経由で単独のコマンドとして呼ぶ。`zsh -n` は1ファイルずつしか検査しないので、`check` ではループで回している。
+レシピはリポジトリ直下の `justfile` にある。`install.sh` と `brew bundle` は `~/` や `/opt/homebrew` に書き込むため、直接実行せず `just` 経由で単独のコマンドとして呼ぶ（前に `cd` を付けたり `&&` でつないだりしない）。`zsh -n` は1ファイルずつしか検査しないので、`check` ではループで回している。
+
+- `just install` は `~/dotfiles`（メインのチェックアウト）で実行する。`install.sh` は自分の置き場所へリンクを張るので、worktree で実行すると、worktree を消したときにリンクが切れる。
+- レシピは「サンドボックス外で実行してよいコマンドの許可リスト」として扱う。追加すると許可範囲が広がるので、何をするレシピかを説明し、ユーザーの許可を得てから追加する。レシピにない操作（`brew uninstall` など）はユーザーに実行を依頼する。
 
 ## セキュリティ（最優先）
 
