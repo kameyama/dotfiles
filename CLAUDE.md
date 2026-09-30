@@ -28,4 +28,4 @@ just check     # 変更後の検証: bash -n / zsh -n / git config -l / brew bun
 
 - 言語ランタイム（python, node, terraform, uv）は **mise** で管理する（`config/mise/config.toml`）。asdf, pyenv, direnv は使わない（移行済み）。julia は mise ではなく brew の `juliaup` で管理する。
 - `Brewfile` には直接使うパッケージだけを書き、依存で入るもの（例: emacs-plus が使う gnutls, texinfo）は書かない。
-- `emacs-plus@30` は公式以外の tap（`d12frosted/emacs-plus`）から入れる。`brew bundle check` を通すには、先に `brew trust --formula d12frosted/emacs-plus/emacs-plus@30` が必要。
+- `emacs-plus@31` は公式以外の tap（`d12frosted/emacs-plus`）から入れる。tap 全体を `brew trust d12frosted/emacs-plus` で信頼済みにしておく必要がある。formula 単位で信頼すると、tap に新しい版が追加されたときに `brew bundle` が止まる。
