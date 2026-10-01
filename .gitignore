@@ -1,3 +1,5 @@
 .DS_Store
 config/zsh/local.zsh
 config/git/config.local
+.claude/worktrees/
+.claude/.cc-writes/

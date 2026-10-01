@@ -28,9 +28,11 @@ just check     # 変更後の検証: bash -n / zsh -n / git config -l / brew bun
   - `~/.config/zsh/local.zsh`（環境変数、PATH、業務ツールの初期化）
   - `~/.config/git/config.local`（`user.name` / `user.email` など）
   - `~/.config/mise/conf.d/*.toml`（業務でだけ使うツール）。`mise use -g` はリンク先であるリポジトリの `config/mise/config.toml` を書き換えるので使わない。
+  - `~/.config/dotfiles/deny-patterns`（会社の情報を検出するパターン。個人PCでは空ファイル）
 - **PCの既存設定を取り込むとき**: `~/` や `~/.config` の中身をリポジトリへ移す前に、1行ずつ汎用か業務用かを判断し、業務用は上の git 管理外のファイルへ回す。判断できない行はリポジトリに入れず、ユーザーに聞く。
 - **commit の作者**: 会社PCでは `config.local` の業務用メールが作者として記録される。このリポジトリでは、リポジトリローカルの `user.email` に個人用アドレス（GitHub の noreply など）を設定しておく。commit 前に `git config user.email` を確認し、会社のアドレスなら commit しない。
-- **commit 前**: `git diff --cached` を読み、上に挙げた情報が含まれていないことを確かめてから commit する。見つけたら commit せずユーザーに報告する。commit 後に気づいたら push せず、ユーザーに報告する（履歴の書き換えが必要になる）。
+- **commit 前・push 前**: `check-secrets` スキルで検査してから commit・push する。見つけたら commit せずユーザーに報告する。commit 後に気づいたら push せず、ユーザーに報告する（履歴の書き換えが必要になる）。
+- **hook**: `.claude/settings.json` の PreToolUse hook（`.claude/hooks/check-secrets.sh`）が、Claude の `git commit` / `git push` の前に機械的な検査を走らせ、見つかれば止める。hook はパターンにある語しか捕まえないので、スキルの目で読む検査の代わりにはならない。止められたら、hook を外したり回避したりせず、`check-secrets` スキルで中身を確かめてユーザーに報告する。
 
 ## 構成の要点
 
