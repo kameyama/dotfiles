@@ -28,6 +28,7 @@ just check     # 変更後の検証: bash -n / zsh -n / git config -l / brew bun
   - `~/.config/zsh/local.zsh`（環境変数、PATH、業務ツールの初期化）
   - `~/.config/git/config.local`（`user.name` / `user.email` など）
   - `~/.config/mise/conf.d/*.toml`（業務でだけ使うツール）。`mise use -g` はリンク先であるリポジトリの `config/mise/config.toml` を書き換えるので使わない。
+  - `~/.config/dotfiles/Brewfile.local`（業務でだけ使う brew パッケージ。`brew bundle --file=~/.config/dotfiles/Brewfile.local`）
   - `~/.config/dotfiles/deny-patterns`（会社の情報を検出するパターン。個人PCでは空ファイル）
 - **PCの既存設定を取り込むとき**: `~/` や `~/.config` の中身をリポジトリへ移す前に、1行ずつ汎用か業務用かを判断し、業務用は上の git 管理外のファイルへ回す。判断できない行はリポジトリに入れず、ユーザーに聞く。
 - **commit の作者**: 会社PCでは `config.local` の業務用メールが作者として記録される。このリポジトリでは、リポジトリローカルの `user.email` に個人用アドレス（GitHub の noreply など）を設定しておく。commit 前に `git config user.email` を確認し、会社のアドレスなら commit しない。
