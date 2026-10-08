@@ -7,3 +7,5 @@
 .direnv/
 **/.terraform/*
 **/.claude/settings.local.json
+
+**/.claude/.cc-writes/

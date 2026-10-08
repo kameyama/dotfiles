@@ -3,6 +3,7 @@ tap "d12frosted/emacs-plus"
 # CLI
 brew "git"
 brew "gh"
+brew "git-filter-repo"
 brew "mise"
 brew "fzf"
 brew "zoxide"
